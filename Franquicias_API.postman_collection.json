@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "franquicias-api-collection",
+		"name": "Franquicias API",
+		"description": "Colección completa de endpoints para la API de Franquicias",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Franquicias",
+			"item": [
+				{
+					"name": "1. Crear Franquicia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Franquicia Ejemplo\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias"
+							]
+						}
+					}
+				},
+				{
+					"name": "7. Actualizar Nombre de Franquicia",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Nuevo Nombre de Franquicia\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/{{franquiciaId}}/nombre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"{{franquiciaId}}",
+								"nombre"
+							]
+						}
+					}
+				},
+				{
+					"name": "6. Obtener Productos con Mayor Stock por Franquicia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/{{franquiciaId}}/productos-maximo-stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"{{franquiciaId}}",
+								"productos-maximo-stock"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Sucursales",
+			"item": [
+				{
+					"name": "2. Agregar Sucursal a una Franquicia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Sucursal Centro\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/{{franquiciaId}}/sucursales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"{{franquiciaId}}",
+								"sucursales"
+							]
+						}
+					}
+				},
+				{
+					"name": "8. Actualizar Nombre de Sucursal",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Nuevo Nombre de Sucursal\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/franquicias/{{franquiciaId}}/sucursales/{{sucursalId}}/nombre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franquicias",
+								"{{franquiciaId}}",
+								"sucursales",
+								"{{sucursalId}}",
+								"nombre"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "3. Agregar Producto a una Sucursal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Producto Ejemplo\",\n  \"stock\": 100\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sucursales/{{sucursalId}}/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sucursales",
+								"{{sucursalId}}",
+								"productos"
+							]
+						}
+					}
+				},
+				{
+					"name": "4. Eliminar Producto de una Sucursal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/sucursales/{{sucursalId}}/productos/{{productoId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sucursales",
+								"{{sucursalId}}",
+								"productos",
+								"{{productoId}}"
+							]
+						}
+					}
+				},
+				{
+					"name": "5. Modificar Stock de un Producto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"stock\": 150\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sucursales/{{sucursalId}}/productos/{{productoId}}/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sucursales",
+								"{{sucursalId}}",
+								"productos",
+								"{{productoId}}",
+								"stock"
+							]
+						}
+					}
+				},
+				{
+					"name": "9. Actualizar Nombre de Producto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Nuevo Nombre de Producto\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sucursales/{{sucursalId}}/productos/{{productoId}}/nombre",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sucursales",
+								"{{sucursalId}}",
+								"productos",
+								"{{productoId}}",
+								"nombre"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "franquiciaId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "sucursalId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "productoId",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
+

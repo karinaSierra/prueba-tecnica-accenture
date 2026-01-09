@@ -1,0 +1,13 @@
+# Ejemplo de variables de Terraform
+# Copiar este archivo a terraform.tfvars y ajustar los valores según necesidad
+
+# Variables de base de datos
+mysql_root_password = "root_password"
+mysql_database      = "franquicias_db"
+mysql_user          = "franquicias_user"
+mysql_password      = "franquicias_pass"
+
+# Puertos
+mysql_port          = 3306
+app_port            = 8080
+
