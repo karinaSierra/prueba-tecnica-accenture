@@ -438,5 +438,6 @@ Desarrollado como prueba técnica para evaluación de habilidades en:
 
 **Nota**: Este proyecto está diseñado como una demostración de habilidades técnicas en desarrollo backend profesional con enfoque en programación reactiva y arquitectura limpia.
 
-#   p r u e b a - t e c n i c a - a c c e n t u r e  
+#   p r u e b a - t e c n i c a - a c c e n t u r e 
+ 
  
