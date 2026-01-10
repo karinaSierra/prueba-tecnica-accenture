@@ -48,7 +48,6 @@ Este proyecto fue desarrollado como **prueba técnica** para demostrar las sigui
 - **Spring WebFlux** - Programación reactiva y no bloqueante
 - **Spring Data R2DBC** - Abstracción de acceso a datos reactivo
 - **R2DBC MySQL Driver 1.0.5** - Driver reactivo para MySQL
-- **Lombok** - Reducción de boilerplate
 - **Spring Boot Validation** - Validación de DTOs con Bean Validation
 - **Spring Boot Actuator** - Health checks y monitoreo
 
@@ -419,18 +418,6 @@ Content-Type: application/json
 }
 ```
 
-### Endpoints de Monitoreo
-
-#### Health Check
-```http
-GET /actuator/health
-```
-
-#### Info
-```http
-GET /actuator/info
-```
-
 ---
 
 ## Requisitos Previos
@@ -535,14 +522,6 @@ mvn spring-boot:run
 ```
 
 ### Paso 4: Verificar que la Aplicación Está Ejecutándose
-
-```bash
-# Verificar health check
-curl http://localhost:8080/actuator/health
-
-# O abrir en el navegador
-# http://localhost:8080/actuator/health
-```
 
 La aplicación estará disponible en: `http://localhost:8080`
 
@@ -751,11 +730,6 @@ La API se encuentra desplegada en AWS EC2 y accesible públicamente:
 http://18.204.247.170:8080/api
 ```
 
-**Health Check:**
-```
-http://18.204.247.170:8080/actuator/health
-```
-
 La API está completamente funcional y lista para pruebas. Todos los endpoints documentados están disponibles en esta URL.
 
 ⚠️ **Nota**: La instancia puede ser detenida después del proceso de evaluación para evitar costos innecesarios.
@@ -882,16 +856,7 @@ Esta configuración se encuentra en `pom.xml` con el plugin JaCoCo.
 - Estándar en la industria
 - Muestra compromiso con la calidad
 
-### 8. Lombok para Reducir Boilerplate
-
-**Decisión**: Incluir Lombok para generar código automáticamente (getters, setters, constructors, etc.).
-
-**Razón**:
-- Reduce la cantidad de código repetitivo
-- Hace el código más legible
-- Mantiene las clases enfocadas en la lógica
-
-### 9. Spring Boot Actuator
+### 8. Spring Boot Actuator
 
 **Decisión**: Incluir Spring Boot Actuator para health checks.
 
