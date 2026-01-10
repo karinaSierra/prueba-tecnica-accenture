@@ -1,5 +1,17 @@
 # 🏢 API REST Reactiva – Gestión de Franquicias
 
+## 🚀 API Desplegada y Disponible
+
+**La API está desplegada en AWS EC2 y lista para probar:**
+
+🌐 **URL Pública:** http://18.204.247.170:8080/api
+
+Puedes probar todos los endpoints directamente. Ver [Endpoints Principales](#endpoints-principales) para ejemplos de uso.
+
+⚠️ **Nota**: La instancia puede ser detenida después del proceso de evaluación para evitar costos innecesarios.
+
+---
+
 ## Título del Proyecto
 
 **Franquicias API** - API REST Reactiva para Gestión de Franquicias, Sucursales y Productos
@@ -59,6 +71,7 @@ Este proyecto fue desarrollado como **prueba técnica** para demostrar las sigui
   - VPC y Security Groups
   - CloudWatch Logs
   - IAM Roles
+  - RDS MySQL
 
 ---
 
@@ -247,7 +260,12 @@ franquicias-api/
 
 ## Endpoints Principales
 
-Base URL: `http://localhost:8080/api`
+**🌐 URL Desplegada (Producción):** `http://18.204.247.170:8080/api`
+
+**💻 URL Local (Desarrollo):** `http://localhost:8080/api`
+
+> **💡 Tip**: Puedes probar la API desplegada directamente usando los ejemplos de abajo, simplemente reemplaza `localhost:8080` por `18.204.247.170:8080`
+
 
 ### Endpoints Obligatorios
 
@@ -684,20 +702,20 @@ cdk deploy
 Este comando:
 - Crea una VPC en AWS
 - Crea una instancia EC2 con Amazon Linux 2023
-- Configura Security Groups para permitir tráfico HTTP (puerto 8080)
+- Crea una instancia RDS MySQL 8.0 (t3.micro) para la base de datos
+- Configura Security Groups para permitir tráfico HTTP (puerto 8080) y acceso a RDS desde EC2
 - Configura IAM Roles para la instancia EC2
 - Configura CloudWatch Logs
 - Despliega la aplicación en la instancia EC2
+- Despliegue de base de datos MySQL en RDS
 
 ### Configuración de la Base de Datos en AWS
 
-En el despliegue actual, la base de datos MySQL se ejecuta en un contenedor Docker dentro de la instancia EC2. No se utiliza RDS para mantener la solución simple y alineada al alcance de la prueba técnica.
+En el despliegue en AWS, la base de datos MySQL se ejecuta en **RDS (Relational Database Service)**, una base de datos gestionada que proporciona alta disponibilidad, backups automáticos y gestión administrada por AWS.
 
 **Resumen de despliegue:**
 - **Local**: MySQL en contenedor Docker (docker-compose)
-- **AWS**: MySQL en contenedor Docker dentro de EC2
-
-Esto permite una configuración consistente entre entornos y facilita el despliegue sin la complejidad adicional de gestionar una instancia RDS separada.
+- **AWS**: MySQL 8.0 en RDS (instancia t3.micro)
 
 7. **Obtener la URL de la API:**
 
@@ -716,8 +734,6 @@ O consultar en la consola de AWS CloudFormation.
 cdk destroy
 ```
 
-⚠️ **Nota**: Esto eliminará todos los recursos creados, incluyendo la instancia EC2 y la VPC.
-
 ### Documentación Adicional
 
 Para más detalles sobre la infraestructura, consulta:
@@ -728,12 +744,19 @@ Para más detalles sobre la infraestructura, consulta:
 
 ## API Desplegada (Ambiente de Pruebas)
 
-La API se encuentra desplegada en AWS EC2 y accesible públicamente en:
+La API se encuentra desplegada en AWS EC2 y accesible públicamente:
 
 **Base URL:**
 ```
-http://100.48.214.127:8080/api
+http://18.204.247.170:8080/api
 ```
+
+**Health Check:**
+```
+http://18.204.247.170:8080/actuator/health
+```
+
+La API está completamente funcional y lista para pruebas. Todos los endpoints documentados están disponibles en esta URL.
 
 ⚠️ **Nota**: La instancia puede ser detenida después del proceso de evaluación para evitar costos innecesarios.
 
@@ -962,9 +985,10 @@ Esta configuración se encuentra en `pom.xml` con el plugin JaCoCo.
 1. **Despliegue en AWS**: El despliegue con CDK es básico, no incluye:
    - Load Balancer
    - Auto Scaling Groups
-   - Base de datos RDS gestionada (MySQL se ejecuta en contenedor Docker dentro de EC2)
    - CDN (CloudFront)
    - WAF
+   
+   Nota: La base de datos ya está utilizando RDS MySQL gestionada.
 
 2. **Sin CI/CD**: No se incluyó pipeline de CI/CD (GitHub Actions, GitLab CI, Jenkins, etc.).
 
@@ -1021,7 +1045,7 @@ Esta configuración se encuentra en `pom.xml` con el plugin JaCoCo.
 
 ### Mejoras de Infraestructura
 
-1. **Base de datos gestionada**: Migrar a RDS o Aurora MySQL en lugar de MySQL en contenedor Docker dentro de EC2. Esto proporcionaría alta disponibilidad, backups automáticos y gestión administrada por AWS.
+1. **Base de datos mejorada**: configurar Multi-AZ en RDS para mayor disponibilidad y resistencia a fallos.
 
 2. **Load Balancer**: Agregar Application Load Balancer en AWS para distribuir carga.
 
