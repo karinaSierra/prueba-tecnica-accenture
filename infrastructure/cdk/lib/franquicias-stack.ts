@@ -5,6 +5,13 @@ import * as logs from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
 import * as rds from 'aws-cdk-lib/aws-rds';
 
+try {
+  require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+} catch (error) {
+  // Si dotenv no está instalado, usar variables de entorno del sistema
+  console.warn('dotenv no está instalado. Instalarlo con: npm install dotenv');
+}
+
 
 export interface FranquiciasApiStackProps extends cdk.StackProps {
   /**
@@ -28,6 +35,10 @@ export class FranquiciasApiStack extends cdk.Stack {
 
     const appName = props?.appName || 'franquicias-api';
     const environment = props?.environment || 'dev';
+
+    // Leer variables de entorno desde .env
+    const dbUser = process.env.ENV_DB_USER || '';
+    const dbPassword = process.env.ENV_DB_PASSWORD || '';
 
     // ============================================
     // 1. VPC Configuration
@@ -130,8 +141,8 @@ export class FranquiciasApiStack extends cdk.Stack {
       publiclyAccessible: true,
       allocatedStorage: 20,
       credentials: rds.Credentials.fromPassword(
-        'admin',
-        cdk.SecretValue.unsafePlainText('Franquicias123!')
+        dbUser,
+        cdk.SecretValue.unsafePlainText(dbPassword)
       ),
       databaseName: 'franquicias_db',
       removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -157,8 +168,8 @@ export class FranquiciasApiStack extends cdk.Stack {
     
       // Variables de entorno para Spring Boot
       `echo 'SPRING_R2DBC_URL=r2dbc:mysql://${database.dbInstanceEndpointAddress}:3306/franquicias_db' >> /etc/environment`,
-      `echo 'SPRING_R2DBC_USERNAME=admin' >> /etc/environment`,
-      `echo 'SPRING_R2DBC_PASSWORD=Franquicias123!' >> /etc/environment`,
+      `echo 'SPRING_R2DBC_USERNAME=${dbUser}' >> /etc/environment`,
+      `echo 'SPRING_R2DBC_PASSWORD=${dbPassword}' >> /etc/environment`,
       `echo 'SERVER_PORT=8080' >> /etc/environment`,
     
       // Cargar variables
@@ -211,6 +222,7 @@ export class FranquiciasApiStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'DatabaseEndpoint', {
       value: database.dbInstanceEndpointAddress,
     });
+
     
   }
 }
