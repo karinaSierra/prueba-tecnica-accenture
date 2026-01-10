@@ -1,0 +1,29 @@
+# CDK
+cdk.out/
+cdk.context.json
+
+# Node
+node_modules/
+yarn.lock
+
+# Build output
+dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Environment
+.env
+.env.local

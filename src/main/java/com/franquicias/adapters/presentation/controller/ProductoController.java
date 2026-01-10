@@ -1,17 +1,14 @@
 package com.franquicias.adapters.presentation.controller;
-
 import com.franquicias.adapters.presentation.dto.ActualizarNombreRequest;
 import com.franquicias.adapters.presentation.dto.ModificarStockRequest;
-import com.franquicias.adapters.presentation.dto.ProductoMaximoStockResponse;
 import com.franquicias.adapters.presentation.dto.ProductoRequest;
 import com.franquicias.adapters.presentation.dto.ProductoResponse;
-import com.franquicias.adapters.presentation.mapper.ProductoMaximoStockMapper;
 import com.franquicias.application.usecase.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
+
 import reactor.core.publisher.Mono;
 
 @RestController
