@@ -876,4 +876,4 @@ Esta configuración se encuentra en `pom.xml` con el plugin JaCoCo.
 
 ---
 
-**Última actualización**: Enero 2024
+**Última actualización**: Enero 2026
